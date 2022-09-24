@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-uko)&^19(&df7%btw03)*b+a=n#(=j%ozdqs)j(4qh4_5ghsm-
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'lidapa8228.pythonanywhere.com/'
+    'lidapa8228.pythonanywhere.com'
 ]
 
 
