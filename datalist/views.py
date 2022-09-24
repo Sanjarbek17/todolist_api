@@ -24,7 +24,7 @@ def add_data(request):
     else:
         return Response({'status':'data is empty or user exists'}, status=status.HTTP_417_EXPECTATION_FAILED)
 
-@api_view(['delete'])
+@api_view(['POST'])
 def delete_data(request):
     name = request.data.get('name')
     if name:

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="p-5 card">
+        <div class="bg-info p-3 d-flex card-header">
+            <form action="api/get" method="get">
+                <button class="btn btn-primary">GET</button>
+            </form>
+            <h2 class="ps-4">/api/get/</h1>
+        </div>
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">http://127.0.0.1:8000/api/get</span>
+            </div>
+        </div>
+    </div>
+    <div class="p-5 card">
+        <div class="bg-info p-3 d-flex card-header">
+            <form action="api/add" method="post">
+                <button class="btn btn-primary">POST</button>
+            </form>
+            <h2 class="ps-4">/api/add/</h1>
+        </div>
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">http://127.0.0.1:8000/api/add</span>
+            </div>
+            <p>Example: Send this data to post content </p>
+            <p class="text-success ps-5">{"name":"name of todolist"}</p>
+        </div>
+    </div>
+    <div class="p-5 card">
+        <div class="bg-info p-3 d-flex card-header">
+            <form action="api/del" method="POST">
+                <button class="btn btn-primary">DELETE</button>
+            </form>
+            <h2 class="ps-4">/api/del/</h1>
+        </div>
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">http://127.0.0.1:8000/api/del</span>
+            </div>
+            <p>Example: Send this data to post content </p>
+            <p class="text-success ps-5">{"name":"name of deleteing content"}</p>
+        </div>
+    </div>
+    
+    
+      
+      
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
