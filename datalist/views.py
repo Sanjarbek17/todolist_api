@@ -32,3 +32,14 @@ def delete_data(request):
         user.delete()
         return Response({'status':"user deleted"})
     return Response({'status': f'{name} doesn\'t exist'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def update_data(request):
+    name = request.data.get('name')
+    isDone = request.data.get('isDone')
+    if name:
+        user = Usertask.objects.get(name=name)
+        user.isDone = isDone
+        user.save()
+        return Response({'status':'updated'}, status=status.HTTP_202_ACCEPTED)
+    return Response({'status':'data is empty'}, status=status.HTTP_417_EXPECTATION_FAILED)
