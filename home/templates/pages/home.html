@@ -10,15 +10,22 @@
     
     <div class="p-5 card">
         <div class="bg-info p-3 d-flex card-header">
-            <form action="api/get" method="get">
-                <button class="btn btn-primary">GET</button>
+            <form action="api/get" method="POST">
+                <button class="btn btn-primary">POST</button>
             </form>
-            <h2 class="ps-4">/api/get/</h1>
+            <h2 class="ps-4">/api/get/</h2>
+
         </div>
         <div class="card-body">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon3">https://lidapa8228.pythonanywhere.com/api/get</span>
             </div>
+            <p>Example: Send this data to post content </p>
+            <pre class="text-success ps-5">
+{
+    "username":"user username",
+    "password":"valid password"    
+}</pre>
         </div>
     </div>
     <div class="p-5 card">
@@ -33,7 +40,37 @@
                 <span class="input-group-text" id="basic-addon3">https://lidapa8228.pythonanywhere.com/api/add</span>
             </div>
             <p>Example: Send this data to post content </p>
-            <p class="text-success ps-5">{"name":"name of todolist"}</p>
+            <pre class="text-success ps-5">
+{
+    "name":"name of todolist"
+    "username":"user username",
+    "password":"valid password"    
+}
+            </pre>
+
+        </div>
+    </div>
+    <div class="p-5 card">
+        <div class="bg-info p-3 d-flex card-header">
+            <form action="api/add" method="post">
+                <button class="btn btn-primary">POST</button>
+            </form>
+            <h2 class="ps-4">/api/upd/</h1>
+        </div>
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">https://lidapa8228.pythonanywhere.com/api/upd</span>
+            </div>
+            <p>Example: Send this data to post content </p>
+            <pre class="text-success ps-5">
+{
+    "name":"name of todolist"
+    "username":"user username",
+    "password":"valid password",
+    "isDone":"True or False"   
+}
+            </pre>
+
         </div>
     </div>
     <div class="p-5 card">
@@ -48,7 +85,13 @@
                 <span class="input-group-text" id="basic-addon3">https://lidapa8228.pythonanywhere.com/api/del</span>
             </div>
             <p>Example: Send this data to post content </p>
-            <p class="text-success ps-5">{"name":"name of deleteing content"}</p>
+<pre class="text-success ps-5">
+{
+    "name":"name of todolist"
+    "username":"user username",
+    "password":"valid password"    
+}
+            </pre>
         </div>
     </div>
     

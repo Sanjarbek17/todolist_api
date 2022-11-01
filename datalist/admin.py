@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Username, Usertask
 
-# Register your models here.
+admin.site.register(Username)
+admin.site.register(Usertask)
