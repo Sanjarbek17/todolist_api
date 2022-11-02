@@ -7,7 +7,7 @@ from .models import Usertask, Username
 def get_data(request):
     # getting date from request username and password
     username = request.data.get('username', 'guest')
-    password = int(request.data.get('password', '17'))
+    password = request.data.get('password', '17')
     user, created = Username.objects.get_or_create(name=username, password=password)
     # if user created returen created response
     if created:
@@ -28,7 +28,7 @@ def add_data(request):
     # getting date from request username and password
     name = request.data.get('name')
     username = request.data.get('username', 'guest')
-    password = int(request.data.get('password', '17'))
+    password = request.data.get('password', '17')
     # getting user
     user = Username.objects.filter(name=username, password=password)
     if user.exists():
@@ -45,7 +45,7 @@ def delete_data(request):
     # getting date from request username and password
     name = request.data.get('name')
     username = request.data.get('username', 'guest')
-    password = int(request.data.get('password', '17'))
+    password = request.data.get('password', '17')
 
     user = Username.objects.filter(name=username, password=password)
     if user.exists():
@@ -64,7 +64,7 @@ def delete_data(request):
 def update_data(request):
     name = request.data.get('name')
     username = request.data.get('username', 'guest')
-    password = int(request.data.get('password', '17'))
+    password = request.data.get('password', '17')
     isDone = request.data.get('isDone')
 
     user = Username.objects.filter(name=username, password=password)
