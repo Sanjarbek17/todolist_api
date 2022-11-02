@@ -50,7 +50,7 @@ def delete_data(request):
     user = Username.objects.filter(name=username, password=password)
     if user.exists():
         if name:
-            data = user.first().task.objects.filter(name=name)
+            data = user.first().task.filter(name=name)
             if data.exists():
                 data.delete()
                 return Response({'status':"user deleted"}, status=status.HTTP_202_ACCEPTED)
@@ -70,7 +70,7 @@ def update_data(request):
     user = Username.objects.filter(name=username, password=password)
     if user.exists():
         if name:
-            data = user.first().task.objects.filter(name=name)
+            data = user.first().task.filter(name=name)
             if data.exists():
                 data.isDone = isDone
                 data.save()
