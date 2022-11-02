@@ -67,7 +67,7 @@ def update_data(request):
     password = int(request.data.get('password', '17'))
     isDone = request.data.get('isDone')
 
-    user = Username.objects.filter(username=username, password=password)
+    user = Username.objects.filter(name=username, password=password)
     if user.exists():
         if name:
             data = user.first().task.objects.filter(name=name)
