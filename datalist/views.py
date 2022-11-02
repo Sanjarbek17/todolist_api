@@ -52,6 +52,7 @@ def delete_data(request):
         if name:
             data = user.first().task.filter(name=name)
             if data.exists():
+                data = data.first()
                 data.delete()
                 return Response({'status':"user deleted"}, status=status.HTTP_202_ACCEPTED)
             else:
@@ -72,6 +73,7 @@ def update_data(request):
         if name:
             data = user.first().task.filter(name=name)
             if data.exists():
+                data = data.first()
                 data.isDone = isDone
                 data.save()
                 return Response({'status':'updated'}, status=status.HTTP_202_ACCEPTED)
