@@ -7,7 +7,26 @@
     <title>TodoList_api</title>
 </head>
 <body>
-    
+    <div class="p-5 card">
+        <div class="bg-info p-3 d-flex card-header">
+            <form action="api/get" method="POST">
+                <button class="btn btn-primary">POST</button>
+            </form>
+            <h2 class="ps-4">/api/user/</h2>
+
+        </div>
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">https://lidapa8228.pythonanywhere.com/api/user</span>
+            </div>
+            <p>Example: Send this data to post content </p>
+            <pre class="text-success ps-5">
+{
+    "username":"user username",
+    "password":"valid password"    
+}</pre>
+        </div>
+    </div> 
     <div class="p-5 card">
         <div class="bg-info p-3 d-flex card-header">
             <form action="api/get" method="POST">

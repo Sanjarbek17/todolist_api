@@ -3,6 +3,17 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Usertask, Username
 
+@api_view(['post'])
+def get_user(request):
+    # getting date from request username and password
+    username = request.data.get('username', 'guest')
+    password = request.data.get('password', '17')
+    user     = Username.objects.filter(name=username, password=password)
+    # if user created returen created response
+    if user.exists():
+        return Response({'status':"user exists"}, status=status.HTTP_200_OK)
+    return Response({'status': 'User doesn\'t exists'}, status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['get', 'post'])
 def get_data(request):
     # getting date from request username and password
