@@ -1,28 +1,32 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from .models import Usertask, Username
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+from django.contrib.auth.models import User
+
+from .models import Usertask
 
 @api_view(['post'])
 def get_user(request):
     # getting date from request username and password
     username = request.data.get('username', 'guest')
     password = request.data.get('password', '17')
-    user     = Username.objects.filter(name=username, password=password)
-    # if user created returen created response
-    if user.exists():
-        return Response({'status':"user exists"}, status=status.HTTP_200_OK)
+    user     = User.objects.create_user(username=username, password=password)
+    # if user created returns created response
+    if user:
+        return Response({'status':f"user {user} created"}, status=status.HTTP_200_OK)
     return Response({'status': 'User doesn\'t exists'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['get', 'post'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def get_data(request):
     # getting date from request username and password
-    username = request.data.get('username', 'guest')
-    password = request.data.get('password', '17')
-    user, created = Username.objects.get_or_create(name=username, password=password)
+    username = request.user
+    user = User.objects.get(username=username)
     # if user created returen created response
-    if created:
-        return Response({'status': 'created'})
 
     obj = user.task.all()
     lst = []
@@ -35,13 +39,14 @@ def get_data(request):
     return Response(lst, status=status.HTTP_200_OK)
 
 @api_view(['post'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def add_data(request):
     # getting date from request username and password
     name = request.data.get('name')
-    username = request.data.get('username', 'guest')
-    password = request.data.get('password', '17')
+    username = request.user
     # getting user
-    user = Username.objects.filter(name=username, password=password)
+    user = User.objects.get(username=username)
     if user.exists():
         if name:
             user.first().task.create(name=name)
@@ -52,13 +57,14 @@ def add_data(request):
         return Response({'status':'invalid user'}, status=status.HTTP_417_EXPECTATION_FAILED)
 
 @api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_data(request):
     # getting date from request username and password
     name = request.data.get('name')
-    username = request.data.get('username', 'guest')
-    password = request.data.get('password', '17')
+    username = request.user
 
-    user = Username.objects.filter(name=username, password=password)
+    user = User.objects.filter(username=username)
     if user.exists():
         if name:
             data = user.first().task.filter(name=name)
@@ -73,13 +79,14 @@ def delete_data(request):
     return Response({'status': 'invalid user'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def update_data(request):
     name = request.data.get('name')
-    username = request.data.get('username', 'guest')
-    password = request.data.get('password', '17')
+    username = request.user
     isDone = request.data.get('isDone')
 
-    user = Username.objects.filter(name=username, password=password)
+    user = User.objects.filter(username=username)
     if user.exists():
         if name:
             data = user.first().task.filter(name=name)
