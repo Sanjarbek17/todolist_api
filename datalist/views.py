@@ -47,14 +47,12 @@ def add_data(request):
     username = request.user
     # getting user
     user = User.objects.get(username=username)
-    if user.exists():
-        if name:
-            user.first().task.create(name=name)
-            return Response({'status':'created'}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
+
+    if name:
+        user.first().task.create(name=name)
+        return Response({'status':'created'}, status=status.HTTP_201_CREATED)
     else:
-        return Response({'status':'invalid user'}, status=status.HTTP_417_EXPECTATION_FAILED)
+        return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
 @authentication_classes([BasicAuthentication, SessionAuthentication])
@@ -65,18 +63,17 @@ def delete_data(request):
     username = request.user
 
     user = User.objects.filter(username=username)
-    if user.exists():
-        if name:
-            data = user.first().task.filter(name=name)
-            if data.exists():
-                data = data.first()
-                data.delete()
-                return Response({'status':"user deleted"}, status=status.HTTP_202_ACCEPTED)
-            else:
-                return Response({'status':f'{name} doesn\'t exist'}, status=status.HTTP_204_NO_CONTENT)
+    if name:
+        data = user.first().task.filter(name=name)
+        if data.exists():
+            data = data.first()
+            data.delete()
+            return Response({'status':"user deleted"}, status=status.HTTP_202_ACCEPTED)
         else:
-            return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
-    return Response({'status': 'invalid user'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'status':f'{name} doesn\'t exist'}, status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
+    
 
 @api_view(['POST'])
 @authentication_classes([BasicAuthentication, SessionAuthentication])
@@ -87,16 +84,14 @@ def update_data(request):
     isDone = request.data.get('isDone')
 
     user = User.objects.filter(username=username)
-    if user.exists():
-        if name:
-            data = user.first().task.filter(name=name)
-            if data.exists():
-                data = data.first()
-                data.isDone = isDone
-                data.save()
-                return Response({'status':'updated'}, status=status.HTTP_202_ACCEPTED)
-            else:
-                return Response({'status':f'{name} doesn\'t exist'}, status=status.HTTP_204_NO_CONTENT)
+    if name:
+        data = user.first().task.filter(name=name)
+        if data.exists():
+            data = data.first()
+            data.isDone = isDone
+            data.save()
+            return Response({'status':'updated'}, status=status.HTTP_202_ACCEPTED)
         else:
-            return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
-    return Response({'status':'invalid user'}, status=status.HTTP_417_EXPECTATION_FAILED)
+            return Response({'status':f'{name} doesn\'t exist'}, status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
