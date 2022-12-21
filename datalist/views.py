@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from django.contrib.auth.models import User
@@ -20,7 +20,7 @@ def get_user(request):
     return Response({'status': 'User doesn\'t exists'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['get', 'post'])
-@authentication_classes([BasicAuthentication])
+@authentication_classes([BasicAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def get_data(request):
     # getting date from request username and password
@@ -39,7 +39,7 @@ def get_data(request):
     return Response(lst, status=status.HTTP_200_OK)
 
 @api_view(['post'])
-@authentication_classes([BasicAuthentication])
+@authentication_classes([BasicAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def add_data(request):
     # getting date from request username and password
@@ -57,7 +57,7 @@ def add_data(request):
         return Response({'status':'invalid user'}, status=status.HTTP_417_EXPECTATION_FAILED)
 
 @api_view(['POST'])
-@authentication_classes([BasicAuthentication])
+@authentication_classes([BasicAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_data(request):
     # getting date from request username and password
@@ -79,7 +79,7 @@ def delete_data(request):
     return Response({'status': 'invalid user'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
-@authentication_classes([BasicAuthentication])
+@authentication_classes([BasicAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def update_data(request):
     name = request.data.get('name')
