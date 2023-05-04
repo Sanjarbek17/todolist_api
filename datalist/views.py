@@ -20,15 +20,10 @@ def get_user(request):
     return Response({'status': 'User doesn\'t exists'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['get', 'post'])
-@authentication_classes([BasicAuthentication, SessionAuthentication])
-@permission_classes([IsAuthenticated])
 def get_data(request):
-    # getting date from request username and password
-    username = request.user
-    user = User.objects.get(username=username)
     # if user created returen created response
 
-    obj = user.task.all()
+    obj = Usertask.task.all()
     lst = []
     # turning complex date to simple data
     for i in obj:
@@ -39,32 +34,23 @@ def get_data(request):
     return Response(lst, status=status.HTTP_200_OK)
 
 @api_view(['post'])
-@authentication_classes([BasicAuthentication, SessionAuthentication])
-@permission_classes([IsAuthenticated])
 def add_data(request):
     # getting date from request username and password
     name = request.data.get('name')
-    username = request.user
-    # getting user
-    user = User.objects.get(username=username)
 
     if name:
-        user.task.create(name=name)
+        Usertask.task.create(name=name)
         return Response({'status':'created'}, status=status.HTTP_201_CREATED)
     else:
         return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
-@authentication_classes([BasicAuthentication, SessionAuthentication])
-@permission_classes([IsAuthenticated])
 def delete_data(request):
     # getting date from request username and password
     name = request.data.get('name')
-    username = request.user
 
-    user = User.objects.get(username=username)
     if name:
-        data = user.task.filter(name=name)
+        data = Usertask.task.filter(name=name)
         if data.exists():
             data = data.first()
             data.delete()
@@ -76,16 +62,12 @@ def delete_data(request):
     
 
 @api_view(['POST'])
-@authentication_classes([BasicAuthentication, SessionAuthentication])
-@permission_classes([IsAuthenticated])
 def update_data(request):
     name = request.data.get('name')
-    username = request.user
     isDone = request.data.get('isDone')
 
-    user = User.objects.get(username=username)
     if name:
-        data = user.task.filter(name=name)
+        data = Usertask.task.filter(name=name)
         if data.exists():
             data = data.first()
             data.isDone = isDone
