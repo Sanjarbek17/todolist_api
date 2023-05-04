@@ -23,7 +23,7 @@ def get_user(request):
 def get_data(request):
     # if user created returen created response
 
-    obj = Usertask.task.all()
+    obj = Usertask.objects.all()
     lst = []
     # turning complex date to simple data
     for i in obj:

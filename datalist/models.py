@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 #         return self.name
 
 class Usertask(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task')
     name = models.CharField(max_length=100)
     isDone = models.BooleanField(default=False)
     
