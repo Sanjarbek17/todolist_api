@@ -39,7 +39,7 @@ def add_data(request):
     name = request.data.get('name')
 
     if name:
-        Usertask.task.create(name=name)
+        Usertask.objects.create(name=name)
         return Response({'status':'created'}, status=status.HTTP_201_CREATED)
     else:
         return Response({'status':'date is emptpy'}, status=status.HTTP_204_NO_CONTENT)
@@ -50,7 +50,7 @@ def delete_data(request):
     name = request.data.get('name')
 
     if name:
-        data = Usertask.task.filter(name=name)
+        data = Usertask.objects.filter(name=name)
         if data.exists():
             data = data.first()
             data.delete()
@@ -67,7 +67,7 @@ def update_data(request):
     isDone = request.data.get('isDone')
 
     if name:
-        data = Usertask.task.filter(name=name)
+        data = Usertask.objects.filter(name=name)
         if data.exists():
             data = data.first()
             data.isDone = isDone
